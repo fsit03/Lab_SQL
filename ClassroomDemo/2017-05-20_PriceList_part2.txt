@@ -1,0 +1,56 @@
+use Northwind
+go
+
+-- °_
+select * from Products
+
+-- ©Ó
+select CategoryID, ProductID, ProductName, UnitPrice
+  from Products
+
+-- Âà
+select avg(UnitPrice) from Products where CategoryID = 1
+select avg(UnitPrice) from Products where CategoryID = 2
+select avg(UnitPrice) from Products where CategoryID = 3
+
+-- ¦X
+select CategoryID, ProductID, ProductName, UnitPrice, 
+  (select avg(UnitPrice) from Products where CategoryID = 1) as AvgPrice
+  from Products
+
+
+select CategoryID, ProductID, ProductName, UnitPrice
+  from Products
+
+select p.CategoryID, ProductID, ProductName, UnitPrice
+  from Products as p
+
+select CategoryID, (select p.CategoryID), ProductID, ProductName, UnitPrice
+  from Products as p
+
+------------------------------------
+select CategoryID, ProductID, ProductName, UnitPrice, 
+  (select avg(UnitPrice) 
+    from Products 
+	 where CategoryID = p.CategoryID) as AvgPrice,
+  UnitPrice - (select avg(UnitPrice) 
+    from Products 
+	 where CategoryID = p.CategoryID) as PriceDiff
+  from Products as p
+
+-- =============================================
+
+select CategoryID, avg(UnitPrice) as AvgPrice
+  from Products
+  group by CategoryID
+
+select p.CategoryID, ProductID, ProductName, UnitPrice, AvgPrice
+   from Products p join 
+      (
+		select CategoryID, avg(UnitPrice) as AvgPrice
+		  from Products
+		  group by CategoryID
+	  ) as g on g.CategoryID = p.CategoryID
+
+
+
