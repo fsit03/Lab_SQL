@@ -1,0 +1,31 @@
+use Northwind
+go
+
+-- °_
+select * from Orders
+
+-- ©Ó
+select OrderID, CustomerID, OrderDate
+  from Orders
+
+-- Âà
+select OrderID, CustomerID, OrderDate
+  from Orders
+  where ???
+
+select MAX(OrderDate) from Orders
+
+-- ¦X
+select OrderID, CustomerID, OrderDate
+  from Orders
+  where OrderDate = '1998-05-06'
+
+select OrderID, CustomerID, OrderDate
+  from Orders
+  where OrderDate = (select ...)
+
+select OrderID, CustomerID, OrderDate
+  from Orders
+  where OrderDate = (select MAX(OrderDate) from Orders)
+
+

@@ -1,0 +1,33 @@
+use Northwind
+go
+
+-- 起
+select * from Products
+
+-- 承
+select CategoryID, ProductID, ProductName, UnitPrice
+  from Products
+
+-- 轉
+select CategoryID, ProductID, ProductName, UnitPrice
+  平均
+  from Products
+
+select avg(UnitPrice) from Products
+
+-- 合
+select CategoryID, ProductID, ProductName, UnitPrice, 
+  28.8663 as AvgPrice
+  from Products
+
+select CategoryID, ProductID, ProductName, UnitPrice, 
+  (select avg() ...) as AvgPrice
+  from Products
+
+-----------------
+select CategoryID, ProductID, ProductName, UnitPrice, 
+  (select avg(UnitPrice) from Products) as AvgPrice,
+  UnitPrice - (select avg(UnitPrice) from Products) as priceDiff
+  from Products
+
+
